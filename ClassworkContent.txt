@@ -1,0 +1,86 @@
+Skip to main content
+CodePath
+Student Hub
+Courses
+Applications
+Career
+Member ID 131632
+
+Ashank Dsouza
+Courses
+Quick Actions
+AI301 | AI Open Source Capstone
+AI Open Source Capstone Fall 2026 (@ Section 1 | Wednesdays 3PM - 5PM PT)
+Personal Member ID#: 131632
+Need help? Post on our class slack channel or email us at support@codepath.org
+
+Welcome
+Getting Started
+Candidate Issues
+Course Info
+AI Prompting Guide
+Beat 1
+Unit 1  
+Unit 2  
+Unit 3  
+Unit 4  
+Beat 2
+Beat 3
+ Schedule
+ 
+ Overview
+ Activity
+Assignment
+Activity: Rubric Calibration (50 minutes)
+Everyone grades the same four issues with their own rubric, then your group compares verdicts and argues out the disagreements. Annotation teams call this inter-rater calibration: grade a shared sample, compare, argue, tighten the guidelines, regrade. You argue as a group, but the rubric you revise and submit is your own.
+
+This page is the only set of instructions for the activity; the solo and group worksheets below are for you to fill in alongside it.
+Phase	Minutes	Mode
+1. Grade the 4 issues	10	solo, in your solo worksheet
+2. Disagreement log + synthesis	15	group, in the group worksheet
+3. Revision marks	10	solo, in your solo worksheet
+4. Debrief	5	group, in the group worksheet
+📖 Terms this page uses
+🎒 What you need walking in
+Your draft rubric from the lecture, with at least 2 checks. If you have fewer, spend the first two minutes of phase 1 drafting checks from the four families named in lecture: the maintainer is alive, the repo is in use, the scope fits you, nobody else is on it. Grade with whatever you have.
+
+🛠️ Setup: make your copies (at activity start)
+Everyone: open the Rubric calibration worksheet (solo) and make a copy. This is YOUR worksheet. Phases 1 and 3 go in here.
+Designate one member per group before anything else in the breakout room to: open the Rubric calibration worksheet (group) and make a copy. Then click Share and change the permissions to "Anyone with the link" can edit, and paste its link in the room. This is the GROUP worksheet. Phases 2 and 4 go in here.
+⏱️ Phase 1: grade the four issues (10 min, solo, solo worksheet)
+Name your checks at the top of the solo worksheet's phase 1 section, in the Check 1 through Check 3 fields. Take the short names from the Check column of your rubric and write one name per field, in order. If your rubric has more than 3 checks, grade with the 3 you would keep if forced to cut the rest; if it has fewer, leave the extra fields blank and grade with what you have.
+Open the four calibration bundles in your Unit 1 materials: eval/issues/calib-01.md, calib-02.md, calib-03.md, calib-04.md. Reading them right on GitHub is fine for this phase; the homework has you clone the repo.
+Take one bundle at a time and read it in full before grading anything. The deciding evidence usually sits in the repo-facts block and the comment thread; the titles are written to mislead you.
+Fill in that bundle's row of the grading table, one cell per check: apply the check's pass condition to the bundle's evidence and write P (condition met), F (condition not met), or ? (not enough evidence in the bundle to decide). The filled calib-00 row shows the format.
+In that row's Verdict cell, combine your check grades using your rubric's verdict rule and write accept or reject.
+Grade only what is in the bundle. Do not open the issue's live page on GitHub: the live issue has moved on since the snapshot date, and the bundle is what everyone in your group is grading.
+✍️ Write this down: while you're reading the four bundles, one of them names an assignee in its repo facts (the other three read none). Write down that GitHub handle. You'll need it for the special activity at the end of today's session.
+Have all four issue rows filled when the timer ends.
+
+🗣️ Phase 2: the disagreement log (15 min, group, group worksheet)
+Fill the verdict roll-call table first: every member adds their name and their four verdicts from phase 1. That is your comparison, issue by issue.
+For each issue where verdicts split, find the single check that drove the split and fill one disagreement block: the issue, the check in dispute, who graded what (names and their P / F / ?), and a one-line reason for the split. The worksheet has four blocks; copy one if the group needs more.
+Matching verdicts can still hide a split: two people can reject the same issue for incompatible reasons. Compare check grades too, and fill a block wherever they differ.
+If the group agrees on everything, you missed something: one of the four issues is built to look better than it is. Regrade it check by check and find what everyone took at face value.
+Spend the last three minutes on the two synthesis lists:
+Checks every rubric needs: checks the whole group would adopt, each with its evidence source and a threshold. Your rubric should not be missing these.
+Checks we could not agree on: checks the group still splits on after arguing the evidence. Name the check and the two positions. You have to pick a side and write it into your rubric.
+✏️ Phase 3: revision marks (10 min, solo, solo worksheet)
+Back in your solo worksheet, fill the revision-mark blocks: one block per change your rubric needs. The worksheet has three; copy one if you need more.
+
+First line, the kind of change: add (a new check), drop (delete a check), tighten (make a pass condition more precise or move its threshold), demote (required to preferred, for a check that keeps rejecting good issues), or promote (preferred to required, for when a bad issue got through because the check that would have caught it was only preferred).
+Second line, the check's name.
+Third line, which logged disagreement motivated the change. If the change adds a check nobody in the group had (so no disagreement could have exposed it), write gap plus the issue that exposed it.
+Write marks only; the full rewrite is homework.
+
+🎤 Phase 4: debrief (5 min, group, group worksheet)
+Agree on one answer and write it on the debrief line: which single check changed the most verdicts today? The instructor samples a few groups for a one-line report-out.
+
+🏠 After class (homework, before the deadline)
+Get your Unit 1 materials onto your machine: git clone https://github.com/codepath/ai301-unit1-starter.git (or, on the repo page: Code, then Download ZIP). Inside are the skill (skill/) and the eval harness (eval/).
+Make your skill runnable:
+Copy the whole skill/ folder from the clone to ~/.claude/skills/issue-select/ (create the folders if they do not exist). This is how a Claude Code skill is installed; claude finds any skill under ~/.claude/skills/ from whatever directory you run it in.
+Then open ~/.claude/skills/issue-select/scope.md and set its Repo: line to your sections's PathReview repo(https://github.com/codepath/pathreview-ai301-fa26-s1), in the org/name format. In this case, that's codepath/pathreview-ai301-fa26-s1. That is the repo your skill looks in, so fill it in before you run live mode.
+Finish the revision in rubric.md, edited inside your installed copy at ~/.claude/skills/issue-select/rubric.md. The file holds your checks table plus your verdict rule, in the template's format, and it is the one file you write this unit. That installed copy is your one real rubric: point the harness's --rubric flag at it too, so eval runs and live runs use the same file.
+Run the eval harness from the clone's eval/ directory (the eval README there has the one command) and read every disagreement with the gold labels (the staff answer key).
+Revise and re-run as often as you like, then save your final run to beat-1-sandbox/unit-1/eval-run.txt in your course repo and submit on the Assignment tab.
