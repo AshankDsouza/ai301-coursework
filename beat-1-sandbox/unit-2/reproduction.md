@@ -15,8 +15,7 @@ label is not graded.
 
 **GitHub username**
 
-[Your GitHub username, exactly as it appears on your profile — no `@`, no profile URL. Your
-comments upstream are identified by this name.]
+AshankDsouza
 
 ---
 
@@ -24,16 +23,39 @@ comments upstream are identified by this name.]
 
 **Claim comment**
 
-[Link to the comment where you claimed the issue. Use the comment's own permalink, not the
-issue page on its own. **Then paste the text of that comment underneath the link** — the
-pasted text is what this field is graded on, so copy across what you actually posted.]
+https://github.com/codepath/pathreview-ai301-fa26-s1/issues/73#issuecomment-5904209108
+
+Hi! I will verify the README and `.env.example` configuration mismatch described here against
+`core/config.py`, then follow up with a reproduction report that records the repository revision,
+steps, and observed settings.
 
 **Reproduction comment**
 
-[Link to the comment where you posted your reproduction. It must record the environment
-(OS, relevant versions, code state), steps a stranger could follow, and what you observed.
-**Then paste the text of that comment underneath the link** — the pasted text is what this
-field is graded on, so copy across what you actually posted.]
+https://github.com/codepath/pathreview-ai301-fa26-s1/issues/73#issuecomment-5904212254
+
+Reproduction report
+
+Environment: macOS 26.3.1; Git 2.30.1 (Apple Git-130); fork revision `f89c06f`.
+
+Steps:
+1. Clone the repository and check out revision `f89c06f`.
+2. Run `grep -n "OPENROUTER_API_KEY" README.md`.
+3. Run `grep -nE "LLM_PROVIDER|OPENAI_API_KEY|OPENROUTER_API_KEY|OPENROUTER_MODEL" .env.example`.
+4. Run `grep -nE "llm_provider|openai_api_key|openrouter_api_key|openrouter_model" core/config.py`.
+
+Observed:
+- `README.md:24` tells users to add `OPENROUTER_API_KEY` to `.env`.
+- `.env.example` lists `LLM_PROVIDER=mock` and `OPENAI_API_KEY`, but no
+  `OPENROUTER_API_KEY` or `OPENROUTER_MODEL`.
+- `core/config.py` defines `openrouter_api_key` and `openrouter_model` in addition to the OpenAI
+  settings.
+
+Expected: the README, `.env.example`, and `core/config.py` describe the same supported LLM
+configuration.
+
+Actual: a user following the README is instructed to set `OPENROUTER_API_KEY`, but the example
+environment file neither documents that variable nor presents the OpenRouter provider/model
+settings.
 
 ## Eval iterations
 
@@ -42,28 +64,36 @@ fields.
 
 **Run history**
 
-[The agreement score of each run you did, in order. A single run is a complete answer if
-only one run occurred. **The last score in your list must match the agreement line in the
-`eval-run.txt` you committed** — that file is the record of your final run.]
+Run 1 did not produce an agreement score. The full harness launched all 20 packages, but each
+`claude -p --model sonnet` invocation exited before grading. A direct CLI check reported
+`Failed to authenticate: OAuth session expired and could not be refreshed`. The harness therefore
+reported `agreement: 0/0 scored items` and did not write a complete `eval-run.txt`. I did not
+create or edit an eval transcript by hand.
 
 **Package analysis**
 
-[Pick one scored package (`pkg-01` through `pkg-20` — the four `calib-` packages are never
-scored). Name it by id, say what your rubric decided and what the gold label said, and
-explain why your rubric read it that way.]
+I manually applied the uploaded rubric to `pkg-20`; this is not a harness result because the
+authentication failure prevented model grading. The rubric's decision is **reject**, which matches
+the gold label **reject**. The report's steps, environment, and artifacts are otherwise strong,
+but the repo-facts block says Ghostty requires disclosure of all AI use and neither candidate
+comment discloses it. The required `Repository conventions are met` check therefore fails: a
+policy requirement is evidence, not a stylistic preference.
 
 **Check rationale**
 
-[Quote one check from the `rubric.md` you uploaded to `tools/repro-check/`, exactly as it reads now.
-Then say why it reads that way — what you revised to get there, or what you rejected in
-favour of it.]
+`| Artifact demonstrates the reported outcome | Read the repro report's shown output, log, screenshot description, or other artifact against the issue's described behavior and expected/actual outcome. | The shown artifact demonstrates the same behavior the issue describes under the reported attempt, not merely a related error, a successful setup, or a differently-triggered failure. | required |`
+
+I chose this check because a report can be detailed while proving the wrong behavior. I rejected a
+format-based rule such as requiring a fixed number of steps or a particular heading: those rules
+reward polished prose without establishing that the reported issue actually occurred.
 
 **Trade-offs**
 
-[Every check gives something up. Any one of these is a complete answer: a package whose
-result it changes, a canary you re-ran with `--only`, a case you accept it will miss, or a
-stated reason nothing changed elsewhere. "Nothing changed, and here is how I know" earns
-the point in full when the reason follows.]
+The artifact check deliberately rejects adjacent failures. For example, it rejects a report whose
+altered input produces a parser error when the issue is about a later crash, even though both
+attempts fail. That can reject a useful early investigation when the reporter's exact environment
+is unavailable, but accepting it would let a confident report misidentify a different defect as
+the issue under review.
 
 ---
 
